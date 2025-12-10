@@ -42,3 +42,4 @@ lean_lib NeutrinoAnomalies
 lean_lib ProtonDecayPrediction
 lean_lib UVIRChainDiscrimination
 lean_lib RenormalizabilityFromObstruction
+lean_lib CabibboAngleFromE8
