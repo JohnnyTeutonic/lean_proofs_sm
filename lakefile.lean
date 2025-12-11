@@ -47,3 +47,5 @@ lean_lib DESIDarkEnergyPredictions
 lean_lib NeutrinoHierarchyFromE8
 lean_lib StrongCPFromObstruction
 lean_lib ProtonDecayFromE8
+lean_lib FineStructureFromE8
+lean_lib HyperchargeFromSU5
