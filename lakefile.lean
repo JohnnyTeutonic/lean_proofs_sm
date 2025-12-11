@@ -45,3 +45,5 @@ lean_lib RenormalizabilityFromObstruction
 lean_lib CabibboAngleFromE8
 lean_lib DESIDarkEnergyPredictions
 lean_lib NeutrinoHierarchyFromE8
+lean_lib StrongCPFromObstruction
+lean_lib ProtonDecayFromE8
