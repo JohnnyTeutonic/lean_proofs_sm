@@ -206,24 +206,9 @@
 
 ## TIER B: Structurally Justified Predictions
 
-**Selection Hypothesis H_mix**
+Tier B predictions use dimension ratios from the E₈ chain with clear structural motivation. Each ratio has a specific physical interpretation; the numbers are not arbitrary.
 
-Tier B predictions derive specific numerical values from a **selection principle**:
-
-> For each sector, the relevant parameter arises from the **smallest admissible** representation or algebra satisfying structural constraints.
-
-The constraints (anomaly cancellation, 3 generations, E₈ chain membership, minimality) act as a **filter**. The numerical values (27, 78, 133, etc.) are **outputs** of this filter, not inputs.
-
-**What's Proven** (in `MixingSelectionTheorem.lean`):
-- `unique_quark_rep`: Only one representation passes all quark-sector constraints
-- `quark_rep_dim_is_27`: That representation has dimension 27
-- `unique_lepton_algebra`: Only one algebra passes all lepton-sector constraints  
-- `lepton_algebra_dim_is_78`: That algebra has dimension 78
-
-**What's Hypothesized**:
-- H_mix itself is the correct selection principle (not yet proven unique)
-
-**Tier B Status**: Values are derived from H_mix + structural constraints, not assumed as literals.
+**Structural Principle**: Confinement splitting separates quarks (representation quotients) from leptons (algebra quotients). The specific dimensions arise from the E₈ → E₇ → E₆ → SM chain.
 
 ---
 
@@ -231,13 +216,18 @@ The constraints (anomaly cancellation, 3 generations, E₈ chain membership, min
 
 **Prediction**: γ = w_a/(1+w_0) = -248/42 = -5.9048
 
-**Derivation**: 
-- dim(E₈)/[rank(E₇) × rank(E₆)] = 248/(7×6) = 248/42
-- Obstruction flow rate from E₈ to SM
+**Structural Interpretation**:
+- 248 = dim(E₈) = total obstruction directions in UV algebra
+- 7 × 6 = rank(E₇) × rank(E₆) = control channels (Cartan directions of intermediate stages)
+- γ = (obstruction DOFs) / (control channels) = average relaxation rate per channel
+
+**What's Derived**: Given "γ = obstruction rate per control channel", the value 248/42 is forced.
+
+**What's Assumed**: That the control manifold dimension is rank(E₇) × rank(E₆) specifically.
 
 **Lean file**: `GammaStructuralDerivation.lean`
 
-**Status**: ✓ Matches DESI 2025 to 0.1%
+**Status**: Matches DESI 2025 to 0.1%
 
 **Falsification**: γ measured outside (-6.5, -5.5) at >5σ
 
@@ -247,11 +237,19 @@ The constraints (anomaly cancellation, 3 generations, E₈ chain membership, min
 
 **Prediction**: κ = ln(248)/ln(133) = 1.1274
 
-**Derivation**: Shannon uniqueness theorem + E₈→E₇ breaking ratio
+**Structural Interpretation**:
+- Treat algebra "information content" as log(dim) — entropy of uniform distribution over basis states
+- E₈ is UV algebra, E₇ is maximal exceptional subalgebra in chain
+- κ = S(E₈)/S(E₇) = ln(dim E₈)/ln(dim E₇) — ratio of obstruction entropies
+- Cosmological suppression: Λ_obs/Λ_QFT ~ exp(-κ × 248)
+
+**What's Derived**: Given entropic hypothesis, κ is uniquely ln(248)/ln(133). Other chains (E₆, D₇, A₇) give wrong suppression scale.
+
+**What's Assumed**: That obstruction complexity is proportional to log(dim algebra).
 
 **Lean file**: `KappaGeometricMeaning.lean`
 
-**Status**: Consistent with all UV-IR relations
+**Status**: Consistent with CC suppression ~10⁻¹²²
 
 **Falsification**: κ measured inconsistent with 1.1274 via independent method
 
@@ -261,11 +259,19 @@ The constraints (anomaly cancellation, 3 generations, E₈ chain membership, min
 
 **Prediction**: sin θ_C = 27/120 = 0.225
 
-**Derivation**: Confinement Splitting Theorem — CKM angles from representation dimension ratios under confinement.
+**Structural Interpretation**:
+- 27 = smallest chiral E₆ rep carrying one generation (unique by selection theorem)
+- 120 = dim(SO(16) adjoint) — pure gauge piece in E₈ → SO(16) decomposition (248 = 120 + 128)
+- Confinement splitting: quarks feel mixing through rep/gauge ratio
+- sin θ_C = dim(generation rep) / dim(gauge obstruction reservoir)
 
-**Lean file**: `MixingFromConfinement.lean`
+**What's Derived**: Given confinement splitting + selection theorem, 27/120 is forced.
 
-**Status**: ✓ Matches experiment (0.2253 ± 0.0008)
+**What's Assumed**: That SO(16) adjoint is the relevant denominator (vs E₆ adjoint, etc.).
+
+**Lean file**: `MixingSelectionTheorem.lean`
+
+**Status**: Matches experiment (0.2253 ± 0.0008)
 
 **Falsification**: Precision measurement outside 27/120 ± 0.005
 
@@ -275,11 +281,19 @@ The constraints (anomaly cancellation, 3 generations, E₈ chain membership, min
 
 **Prediction**: sin²θ₁₂ = 78/256 = 0.3047
 
-**Derivation**: Seesaw Spinor Theorem — dim(E₆)/dim(E₈) ratio from seesaw structure.
+**Structural Interpretation**:
+- 78 = dim(E₆) = internal algebra controlling lepton structure
+- 256 = 2^rank(E₈) = spinor dimension of SO(16) = fermionic Hilbert space
+- Leptons (unconfined) couple to algebra/spinor overlap
+- sin²θ₁₂ = dim(E₆ algebra) / dim(spinor space) = fraction of spinor space controlled by E₆
+
+**What's Derived**: Given "solar mixing = algebra fraction of spinor space", 78/256 is forced.
+
+**What's Assumed**: The principle "solar angle = dim(algebra)/dim(spinor)".
 
 **Lean file**: `SeesawSpinorTheorem.lean`
 
-**Status**: ✓ Matches experiment (0.304 ± 0.013)
+**Status**: Matches experiment (0.304 ± 0.013)
 
 **Falsification**: Measurement outside 0.305 ± 0.02 at >5σ
 
@@ -289,11 +303,19 @@ The constraints (anomaly cancellation, 3 generations, E₈ chain membership, min
 
 **Prediction**: sin²θ₂₃ = 78/133 = 0.586
 
-**Derivation**: Confinement Splitting Theorem — dim(E₆)/dim(E₇).
+**Structural Interpretation**:
+- E₇ = maximal exceptional subalgebra of E₈ containing E₆
+- E₆ = internal algebra housing generations
+- sin²θ₂₃ = dim(E₆)/dim(E₇) = subalgebra coverage fraction
+- "How much of E₇ obstruction is accounted for by E₆?"
 
-**Lean file**: `MixingFromConfinement.lean`
+**What's Derived**: Given "atmospheric mixing = E₆/E₇ coverage", 78/133 is forced.
 
-**Status**: ✓ Matches experiment (0.573 ± 0.020)
+**What's Assumed**: The mapping "this angle = that algebra ratio".
+
+**Lean file**: `MixingSelectionTheorem.lean`
+
+**Status**: Matches experiment (0.573 ± 0.020)
 
 **Falsification**: Measurement outside 0.586 ± 0.03 at >5σ
 
@@ -303,11 +325,19 @@ The constraints (anomaly cancellation, 3 generations, E₈ chain membership, min
 
 **Prediction**: sin²θ₁₃ = 3/133 = 0.0226
 
-**Derivation**: Seesaw Spinor Theorem — N_gen/dim(E₇).
+**Structural Interpretation**:
+- 3 = N_gen = number of generations (from E₈ → E₆ × SU(3) branching)
+- 133 = dim(E₇) = bridge algebra between E₆ and E₈
+- sin²θ₁₃ = N_gen/dim(E₇) = generation leakage into E₇-controlled space
+- Small because 3 << 133 (generation structure is small fraction of E₇)
+
+**What's Derived**: Given "θ₁₃ = generation fraction in E₇", 3/133 is forced.
+
+**What's Assumed**: The identification "θ₁₃ = generation-count fraction".
 
 **Lean file**: `SeesawSpinorTheorem.lean`
 
-**Status**: ✓ Matches experiment (0.0222 ± 0.0007)
+**Status**: Matches experiment (0.0222 ± 0.0007)
 
 **Falsification**: Measurement outside 0.0226 ± 0.002 at >5σ
 
