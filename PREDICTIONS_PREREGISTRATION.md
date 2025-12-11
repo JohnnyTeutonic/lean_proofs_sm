@@ -206,17 +206,24 @@
 
 ## TIER B: Structurally Justified Predictions
 
-**Important Note on Epistemic Status**: 
+**Selection Hypothesis H_mix**
 
-The mixing angle predictions (P₁₅-P₁₈) were **originally discovered** by searching ~450 possible ratios of E₈/E₆/E₇ dimensions. Finding 4-5 matches is expected by chance alone. This is why they are Tier B, not Tier A.
+Tier B predictions derive specific numerical values from a **selection principle**:
 
-However, we have subsequently provided **structural theorems** (Confinement Splitting, Seesaw Spinor) that explain *why* these specific ratios appear. The theorems show:
-- Quark mixing (CKM) comes from **representation dimension ratios under confinement**
-- Lepton mixing (PMNS) comes from **seesaw structure in the E₆ 27-representation**
+> For each sector, the relevant parameter arises from the **smallest admissible** representation or algebra satisfying structural constraints.
 
-The dichotomy (small CKM, large PMNS) is itself a structural prediction, not a coincidence.
+The constraints (anomaly cancellation, 3 generations, E₈ chain membership, minimality) act as a **filter**. The numerical values (27, 78, 133, etc.) are **outputs** of this filter, not inputs.
 
-**Honest assessment**: These predictions are stronger than pure numerology because (a) they have structural derivations, (b) the CKM-PMNS pattern is consistent, (c) all values fall within experimental error. But they are weaker than Tier A because the ratios were found empirically first.
+**What's Proven** (in `MixingSelectionTheorem.lean`):
+- `unique_quark_rep`: Only one representation passes all quark-sector constraints
+- `quark_rep_dim_is_27`: That representation has dimension 27
+- `unique_lepton_algebra`: Only one algebra passes all lepton-sector constraints  
+- `lepton_algebra_dim_is_78`: That algebra has dimension 78
+
+**What's Hypothesized**:
+- H_mix itself is the correct selection principle (not yet proven unique)
+
+**Tier B Status**: Values are derived from H_mix + structural constraints, not assumed as literals.
 
 ---
 
