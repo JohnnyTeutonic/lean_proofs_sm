@@ -206,6 +206,20 @@
 
 ## TIER B: Structurally Justified Predictions
 
+**Important Note on Epistemic Status**: 
+
+The mixing angle predictions (P₁₅-P₁₈) were **originally discovered** by searching ~450 possible ratios of E₈/E₆/E₇ dimensions. Finding 4-5 matches is expected by chance alone. This is why they are Tier B, not Tier A.
+
+However, we have subsequently provided **structural theorems** (Confinement Splitting, Seesaw Spinor) that explain *why* these specific ratios appear. The theorems show:
+- Quark mixing (CKM) comes from **representation dimension ratios under confinement**
+- Lepton mixing (PMNS) comes from **seesaw structure in the E₆ 27-representation**
+
+The dichotomy (small CKM, large PMNS) is itself a structural prediction, not a coincidence.
+
+**Honest assessment**: These predictions are stronger than pure numerology because (a) they have structural derivations, (b) the CKM-PMNS pattern is consistent, (c) all values fall within experimental error. But they are weaker than Tier A because the ratios were found empirically first.
+
+---
+
 ### P₁₃: Dark Energy Equation of State Parameter
 
 **Prediction**: γ = w_a/(1+w_0) = -248/42 = -5.9048
