@@ -459,6 +459,71 @@ Tier B predictions use dimension ratios from the E₈ chain with clear structura
 
 ---
 
+## γ = 248/42 Contingency Plan (December 13, 2025)
+
+### What's Locked (Zero Flex)
+
+| Component | Value | Status |
+|-----------|-------|--------|
+| 248 = dim(E₈) | Mathematical fact | **No interpretation flex** |
+| 42 = rank(E₆) × rank(E₇) | Lie algebra structure | **No interpretation flex** |
+| γ = 248/42 ≈ 5.905 | Pure arithmetic | **No interpretation flex** |
+
+The numerology has **zero interpretive flexibility**. If γ ≠ 248/42, the MCI (Modular-Cosmic Identification) fails.
+
+### Where Flex Lives: The MCI Identification
+
+The MCI connects abstract modular flow to cosmic expansion:
+```
+s(a) = (1/γ) ln(a)  where γ = 248/42
+```
+
+This identification has three potential failure modes.
+
+### Failure Mode Analysis
+
+| Mode | Description | What Survives | What Dies |
+|------|-------------|---------------|-----------|
+| **FM1** | Wrong functional form | Kinematics | Dynamics layer |
+| **FM2** | γ correct but noisy | Everything | Nothing |
+| **FM3** | γ definitively wrong | Kinematics | MCI identification |
+
+### Pre-Registered Response Protocol
+
+**If DESI Y3 shows γ = 5.5 ± 0.4** (1σ from 5.905):
+- Status: **Consistent** — wait for Y5
+- Action: Check fσ₈ and ISW observables for coherence
+
+**If DESI Y3 shows γ = 7.0 ± 0.3** (3.6σ tension):
+- Status: **Concerning but not falsified**
+- Action: Check if tension is specific to CPL or appears in all 3 observables
+- If CPL-specific: Revise CPL extraction, not framework
+- If all observables show tension: Prepare for FM3
+
+**If DESI Y5 confirms γ = 7.0 ± 0.15** (7.3σ tension):
+- Status: **MCI Falsified**
+- Action: Publish explicit retraction of dynamics-cosmology connection
+- Framework status: All kinematics (P₁-P₁₁, P₁₅-P₁₉) unaffected
+- Dynamics layer: Requires new physics
+
+### What's Protected by Architecture
+
+The **kinematics-dynamics separation** ensures:
+
+| Layer | Predictions | If γ Wrong |
+|-------|-------------|------------|
+| **Kinematics** | Gauge groups, N_gen=3, sin²θ_W, θ_QCD=0, PMNS angles | Unaffected |
+| **Proton decay** | Selection rules (e⁺π⁰ allowed, μ⁺π⁰ forbidden) | Unaffected |
+| **Dynamics** | γ = 248/42, w(z) shape, fσ₈ suppression | Failed |
+
+### The Honest Position
+
+> **248/42 has no interpretive flex. The MCI either works or doesn't. If it doesn't, the honest response is: "dynamics layer failed, kinematics unaffected." That's why the architecture separates them.**
+
+This is pre-committed graceful degradation, not post-hoc rationalization.
+
+---
+
 ## Falsification Protocol
 
 ### If Normal Hierarchy is Wrong (P₉):
@@ -488,11 +553,94 @@ Tier B predictions use dimension ratios from the E₈ chain with clear structura
 
 ---
 
+## TIER B (continued): Second Observable Channel — Growth fσ₈(z)
+
+### P₂₂: Structure Growth Suppression
+
+**Prediction**: γ-driven cosmology predicts fσ₈(z) differs from ΛCDM by a few percent, with non-monotonic z-dependence:
+
+| z | fσ₈(γ) | fσ₈(ΛCDM) | Δ% |
+|---|--------|----------|----|
+| 0.3 | 0.446 | 0.474 | **-5.79%** |
+| 0.5 | 0.453 | 0.475 | **-4.54%** |
+| 0.8 | 0.446 | 0.453 | **-1.49%** |
+| 1.0 | 0.432 | 0.431 | **+0.24%** |
+
+**Key Feature**: Suppression peaks at low z, then **reverses** near z=1 (crossover signature).
+
+**Derivation**:
+- CPL w(a) = w₀ + wₐ(1-a) with (w₀, wₐ) from γ = 248/42
+- Linear growth ODE integrated via RK4 (20,000 steps)
+- fσ₈(z) = f(a) · σ₈ · D(a)/D(1)
+
+**Numerics Source**: `StructuralIncompatibility/numerics/growth_from_gamma.py`
+
+**Lean Specification**: `StructuralIncompatibility/GrowthPredictionsExplicit.lean` (0 errors)
+
+**Data**: `StructuralIncompatibility/numerics/growth_from_gamma_predictions.csv`
+
+**Plot**: `StructuralIncompatibility/numerics/growth_from_gamma_plot.png`
+
+**Status**: Pre-registered (computed December 13, 2025)
+
+**Falsification**:
+- fσ₈(γ) > fσ₈(ΛCDM) at z=0.3, 0.5, or 0.8 (wrong sign)
+- |Δ%| > 15% at any target z (wrong magnitude)
+- No crossover near z=1 (wrong qualitative behavior)
+
+**WHY THIS IS INDEPENDENT**:
+- Channel 1: (w₀, wₐ) from BAO/SNe distance measurements
+- Channel 2: fσ₈(z) from RSD/weak lensing clustering
+- Different data. Different systematics. Same γ.
+
+**Timeline**: DESI DR2+, Euclid, Rubin (2025-2030)
+
+---
+
+### P₂₃: ISW Cross-Correlation
+
+**Prediction**: γ-driven cosmology modifies ISW-galaxy cross-correlation:
+- **Sign**: Positive (ISW × δ > 0)
+- **Low ℓ (< 20)**: Suppressed 5-15% vs ΛCDM
+- **High ℓ (20-100)**: Enhanced 10-20% vs ΛCDM
+- **Crossover**: ℓ ~ 15-25
+
+**Derivation**: Thawing quintessence causes scale-dependent potential decay.
+
+**Lean file**: `StructuralIncompatibility/ISWPredictions.lean` (0 errors)
+
+**Status**: Pre-registered (qualitative, December 13, 2025)
+
+**Falsification**:
+- ISW-galaxy correlation negative
+- Amplitude ratio at low ℓ > 1.10 (should be suppressed)
+- Amplitude ratio at high ℓ < 0.95 (should be enhanced)
+
+**Timeline**: CMB-S4 + DESI/Euclid cross-correlations (2028+)
+
+---
+
+## Three-Channel Coherence Test
+
+The same γ = 248/42 makes predictions in **three independent channels**:
+
+| Channel | Observable | Data Source | Falsifiable |
+|---------|------------|-------------|-------------|
+| 1. Distance | (w₀, wₐ) CPL | BAO/SNe | ✓ |
+| 2. Growth | fσ₈(z) | RSD/lensing | ✓ |
+| 3. CMB×LSS | ISW amplitude | CMB-S4 × Euclid | ✓ |
+
+**Coherence Test**: If γ fits Channel 1 but fails Channels 2 or 3 → MCI dynamics wrong, kinematics survive.
+
+---
+
 ## Version History
 
 - **v1.0** (Dec 10, 2025): Initial predictions
 - **v2.0** (Dec 11, 2025): E₈ derived; neutrino ordering added; CP violation tiers
 - **v2.1** (Dec 11, 2025): Comprehensive pre-registration with all predictions
+- **v2.2** (Dec 13, 2025): Added γ = 248/42 contingency plan with pre-registered response protocol
+- **v2.3** (Dec 13, 2025): Added P₂₂ (fσ₈ growth) and P₂₃ (ISW) as second/third γ channels; three-channel coherence test
 
 ---
 
