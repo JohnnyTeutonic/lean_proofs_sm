@@ -49,3 +49,4 @@ lean_lib StrongCPFromObstruction
 lean_lib ProtonDecayFromE8
 lean_lib FineStructureFromE8
 lean_lib HyperchargeFromSU5
+lean_lib ImpossibilityTypeExtended
