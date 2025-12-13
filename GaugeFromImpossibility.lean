@@ -89,7 +89,7 @@ theorem spectrum_forces_gauge :
 /-- The phase obstruction structure with EXPLICIT witness dimension -/
 structure PhaseObstruction where
   /-- Mechanism is independence (underdetermination) -/
-  mechanism : Mechanism := .independence
+  mechanism : Mechanism := .parametric
   /-- Quotient is spectrum (continuous parameter space) -/
   quotient : QuotientGeom := .spectrum
   /-- Witness is the circle S¹ (space of phases) -/
@@ -99,7 +99,7 @@ structure PhaseObstruction where
 def phaseObs : PhaseObstruction := {}
 
 /-- Phase obstruction has independence mechanism -/
-theorem phase_is_independence : phaseObs.mechanism = .independence := rfl
+theorem phase_is_independence : phaseObs.mechanism = .parametric := rfl
 
 /-- Phase obstruction has spectrum quotient -/
 theorem phase_is_spectrum : phaseObs.quotient = .spectrum := rfl
@@ -160,7 +160,7 @@ theorem phase_forces_U1 :
 -/
 structure IsospinObstruction where
   /-- Independence: isospin direction is underdetermined -/
-  mechanism : Mechanism := .independence
+  mechanism : Mechanism := .parametric
   /-- Spectrum: continuous parameter space (S²) -/
   quotient : QuotientGeom := .spectrum
   /-- Witness is S³ (the full spinor state space) -/
@@ -193,7 +193,7 @@ axiom covering_group_principle :
     5. SU(2) ≅ S³ is the gauge group
 -/
 theorem isospin_forces_SU2 :
-    isospinObs.mechanism = .independence ∧
+    isospinObs.mechanism = .parametric ∧
     isospinObs.quotient = .spectrum ∧
     isospinObs.observableSpace = "S²" ∧
     isospinObs.actingGroup = "SO(3)" ∧
@@ -221,7 +221,7 @@ theorem isospin_forces_SU2 :
 -/
 structure ColorObstruction where
   /-- Independence: color is underdetermined -/
-  mechanism : Mechanism := .independence
+  mechanism : Mechanism := .parametric
   /-- Spectrum: continuous parameter space (CP²) -/
   quotient : QuotientGeom := .spectrum
   /-- Witness is S⁵ (normalized color states) -/
@@ -254,7 +254,7 @@ axiom SU3_simply_connected : True  -- π₁(SU(3)) = 0
     6. Gauge group: SU(3)
 -/
 theorem color_forces_SU3 :
-    colorObs.mechanism = .independence ∧
+    colorObs.mechanism = .parametric ∧
     colorObs.quotient = .spectrum ∧
     colorObs.colorDimension = 3 ∧
     colorObs.projectiveSpace = "CP²" ∧
@@ -287,9 +287,9 @@ def standardModel : StandardModelGauge := {}
 -/
 theorem standard_model_from_impossibilities :
     -- Three independent impossibilities
-    (phaseObs.mechanism = .independence) ∧
-    (isospinObs.mechanism = .independence) ∧
-    (colorObs.mechanism = .independence) ∧
+    (phaseObs.mechanism = .parametric) ∧
+    (isospinObs.mechanism = .parametric) ∧
+    (colorObs.mechanism = .parametric) ∧
     -- All have spectrum quotient
     (phaseObs.quotient = .spectrum) ∧
     (isospinObs.quotient = .spectrum) ∧
@@ -317,7 +317,7 @@ theorem gauge_from_dimension :
 /-- Simultaneity underdetermination obstruction -/
 structure SimultaneityObstruction where
   /-- Independence: temporal ordering is underdetermined -/
-  mechanism : Mechanism := .independence
+  mechanism : Mechanism := .parametric
   /-- Continuous: parameterized by velocity -/
   quotient : QuotientGeom := .continuous  -- Not spectrum: global, not local
   /-- Witness: space of inertial frames -/
@@ -349,11 +349,11 @@ def lorentz : LorentzGroup := {}
 -/
 theorem physics_from_impossibility_summary :
     -- Phase → U(1)
-    (phaseObs.mechanism = .independence ∧ 
+    (phaseObs.mechanism = .parametric ∧ 
      phaseObs.quotient = .spectrum ∧
      phaseForcedSymmetry = .gauge) ∧
     -- Simultaneity → Lorentz (continuous, not gauge)
-    (simultaneityObs.mechanism = .independence ∧
+    (simultaneityObs.mechanism = .parametric ∧
      simultaneityObs.quotient = .continuous ∧
      quotientToSymType simultaneityObs.quotient = .continuous) := by
   exact ⟨⟨rfl, rfl, rfl⟩, ⟨rfl, rfl, rfl⟩⟩

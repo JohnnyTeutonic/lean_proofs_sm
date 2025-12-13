@@ -317,7 +317,7 @@ structure WitnessAdequacy (σ : SemanticSchema) where
 def phaseConstraint : PhysicalConstraint where
   name := "Phase Underdetermination"
   canonical := {
-    mechanism := .independence
+    mechanism := .parametric
     quotient := .spectrum  -- Phase lives on S¹, infinite parameter space
     witness := Unit        -- Simplified: actual witness is S¹
     obs_rel := fun _ _ => True  -- All phases observationally equivalent

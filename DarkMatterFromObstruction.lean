@@ -156,7 +156,7 @@ QUOTIENT: Binary × Continuous
 - Continuous: fraction ρ_dark/ρ_total (contribution to curvature)
 -/
 def darkMatterObs : DMObstruction where
-  mechanism := .independence
+  mechanism := .parametric
   quotient := .binary  -- Primary quotient; continuous is secondary
   witness := Bool      -- Binary: visible/invisible
   name := "Dark Matter Obstruction"
@@ -405,7 +405,7 @@ section MainTheorem
 
 /-- The fundamental obstruction: GR-QM measurement interface -/
 def gr_qm_interface_obstruction : NegObj where
-  mechanism := .independence
+  mechanism := .parametric
   quotient := .continuous
   witness := ℝ  -- Continuous measurement values
 
@@ -449,7 +449,7 @@ STRUCTURE:
 -/
 theorem dark_matter_is_obstruction :
     -- The dark matter obstruction exists
-    darkMatterObs.mechanism = .independence ∧
+    darkMatterObs.mechanism = .parametric ∧
     -- It has a binary quotient (visible/invisible)
     darkMatterObs.quotient = .binary ∧
     -- Cosmic fractions are consistent

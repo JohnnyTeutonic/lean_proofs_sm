@@ -159,9 +159,9 @@ section CategoricalBridge
 /-- Impossibility mechanisms -/
 inductive Mechanism where
   | diagonal      -- Self-reference (Gödel, Cantor, Russell)
-  | fixedPoint    -- Fixed point theorems (Brouwer, Kakutani)
-  | resource      -- Conservation/tradeoff constraints (CAP, Arrow)
-  | independence  -- Axiomatic independence (CH, AC)
+  | structural    -- n-partite incompatibility (QG, Black Hole, Arrow)
+  | resource      -- Conservation/tradeoff constraints (CAP, Heisenberg)
+  | parametric    -- Axiomatic independence (CH, AC)
   deriving DecidableEq, Repr
 
 /-- Quotient geometry -/
@@ -264,7 +264,7 @@ theorem chiral_forces_permutation :
     The resolution forces SU(5) or larger GUT structure.
 -/
 def gutEmbeddingObs : NegObj where
-  mechanism := .independence      -- Axiomatic constraint on charges
+  mechanism := .parametric      -- Axiomatic constraint on charges
   quotient := .spectrum           -- Continuous family of possible charges
   witness := Fin 5                -- 5-dimensional fundamental rep
 

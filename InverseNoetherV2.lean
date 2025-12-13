@@ -28,17 +28,14 @@
 -/
 
 import Mathlib.Data.Fin.Basic
-import ImpossibilityType
 import Mathlib.Logic.Function.Basic
 import Mathlib.Order.Basic
 
 /-!
-## Modular Design Note
+## Self-Contained Design
 
-This file CAN import from ImpossibilityType.lean when properly configured:
-  import ImpossibilityType  -- Requires lake build ImpossibilityType first
-
-For now, we define compatible types locally. See MODULARIZATION_GUIDE.md.
+This file defines all types locally for standalone compilation.
+Compatible with ImpossibilityType.lean but does not require it.
 -/
 
 namespace InverseNoetherV2
@@ -50,17 +47,17 @@ namespace InverseNoetherV2
 /-- Mechanism types ordered by derivational complexity -/
 inductive Mechanism : Type where
   | diagonal      -- Cantor, Gödel, Halting (self-reference)
-  | fixedPoint    -- Brouwer, Kakutani (topological)
+  | structural    -- n-partite incompatibility (QG, Black Hole, Arrow)
   | resource      -- CAP, Blockchain trilemma (conservation)
-  | independence  -- Continuum hypothesis, parallel postulate (underdetermination)
+  | parametric    -- Continuum hypothesis, parallel postulate (underdetermination)
   deriving DecidableEq, Repr
 
 /-- Rank function for mechanisms (linear order by complexity) -/
 def Mechanism.rank : Mechanism → ℕ
   | .diagonal => 0
-  | .fixedPoint => 1
+  | .structural => 1
   | .resource => 2
-  | .independence => 3
+  | .parametric => 3
 
 /-- Preorder on mechanisms via rank: simpler ≤ more complex -/
 def Mechanism.le (m₁ m₂ : Mechanism) : Prop := m₁.rank ≤ m₂.rank
@@ -245,14 +242,14 @@ def quotientToSymType : QuotientGeom → SymType
 
 /-- Mechanism determines symmetry type (for the P direction)
     
-    NOTE: For fixedPoint mechanism, we default to S₃ as the canonical permutation group.
+    NOTE: For structural mechanism, we default to S₃ as the canonical permutation group.
     The specific n should be determined by the quotient geometry via quotientToSymType.
 -/
 def mechanismToSymType : Mechanism → SymType
   | .diagonal => .discrete
-  | .fixedPoint => .permutation 3  -- Default to S₃
+  | .structural => .permutation 3  -- Default to S₃
   | .resource => .continuous
-  | .independence => .gauge
+  | .parametric => .gauge
 
 /-- KEY LEMMA: quotientToSymType is monotone
     This is what makes P a functor! -/
@@ -309,9 +306,9 @@ def symTypeToQuotient : SymType → QuotientGeom
 -/
 def symTypeToMechanism : SymType → Mechanism
   | .discrete => .diagonal        -- finite symmetry breaks via enumeration
-  | .permutation _ => .fixedPoint -- permutation symmetry breaks via fixed-point
+  | .permutation _ => .structural -- permutation symmetry breaks via n-partite
   | .continuous => .resource      -- continuous symmetry breaks via conservation
-  | .gauge => .independence       -- gauge breaks via underdetermination
+  | .gauge => .parametric         -- gauge breaks via underdetermination
 
 /-- symTypeToQuotient is monotone -/
 theorem symTypeToQuotient_mono {s₁ s₂ : SymType} (h : s₁ ≤ s₂) :
@@ -325,8 +322,25 @@ theorem symTypeToMechanism_mono {s₁ s₂ : SymType} (h : s₁ ≤ s₂) :
   simp only [symTypeToMechanism, LE.le, Mechanism.le, Mechanism.rank, SymType.le] at *
   cases s₁ <;> cases s₂ <;> simp_all
 
--- Note: symType → mechanism → symType is NOT exact for permutation
--- because mechanismToSymType(.fixedPoint) = .permutation 3, losing n
+/-
+**DESIGN NOTE (December 13, 2025):**
+
+The mechanismToSymType function (lines 251-255) hardcodes .structural => .permutation 3,
+but the actual n is recovered from the quotient geometry via quotientToSymType.
+
+Round-trip behavior:
+- mechanism → symType → mechanism: WORKS (line 332-334)
+- symType → mechanism → symType: LOSES n for permutation groups
+
+The design choice to make P_obj use quotientToSymType rather than mechanismToSymType
+sidesteps this issue entirely. The quotient geometry carries the full parametric
+information (n for n-partite), so the symmetry type is always correctly recovered.
+
+This is the right design because:
+1. Quotient geometry is the primary data in NegObj
+2. Mechanism is derivable from quotient (but loses parameters)
+3. P_obj needs full parametric information for tight adjunction
+-/
 
 /-- ROUND-TRIP: mechanism → symType → mechanism = id -/
 theorem mechanism_symType_roundtrip (m : Mechanism) :
@@ -533,7 +547,7 @@ theorem cap_forces_continuous : (P_obj capObs).stype = .continuous := rfl
 
 /-- Continuum hypothesis obstruction -/
 def chObs : NegObj where
-  mechanism := .independence
+  mechanism := .parametric
   quotient := .spectrum  -- Infinitely many consistent values
   witness := ℕ           -- The parameter space
 

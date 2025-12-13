@@ -140,7 +140,7 @@ definitions. The "interface" is the symptom, independence is the mechanism.
 See ImpossibilityType.lean for the 4 true mechanisms vs bridge concepts.
 -/
 def vacuumObs : DEObstruction where
-  mechanism := .independence  -- True mechanism: underdetermination
+  mechanism := .parametric  -- True mechanism: underdetermination
   quotient := .spectrum       -- Spectrum quotient (continuous parameter space)
   witness := ℝ               -- Vacuum energy density
   name := "Vacuum Undefinability"
@@ -179,7 +179,7 @@ QUOTIENT: Exponential
 - Suppression factor: 10^{-122} from E8 degeneracy
 -/
 def darkEnergyObs : DEObstruction where
-  mechanism := .independence  -- Interface modeled as independence
+  mechanism := .parametric  -- Interface modeled as independence
   quotient := .spectrum       -- Exponential modeled as spectrum
   witness := ℝ
   name := "Dark Energy Obstruction"
@@ -265,8 +265,8 @@ def sectorFraction : CosmicSector → ℝ
 /-- The obstruction that forces each sector (using InverseNoetherV2.NegObj) -/
 def sectorObstruction : CosmicSector → NegObj
   | .visible => { mechanism := .resource, quotient := .binary, witness := Bool }
-  | .darkMatter => { mechanism := .independence, quotient := .binary, witness := Bool }
-  | .darkEnergy => { mechanism := .independence, quotient := .spectrum, witness := ℝ }
+  | .darkMatter => { mechanism := .parametric, quotient := .binary, witness := Bool }
+  | .darkEnergy => { mechanism := .parametric, quotient := .spectrum, witness := ℝ }
 
 /-- Apply P functor to each sector -/
 def sectorForcedSymType : CosmicSector → SymType
@@ -512,7 +512,7 @@ STRUCTURE:
 -/
 theorem dark_energy_is_obstruction :
     -- The dark energy obstruction has independence mechanism (interface modeled as independence)
-    darkEnergyObs.mechanism = .independence ∧
+    darkEnergyObs.mechanism = .parametric ∧
     -- It has spectrum quotient (exponential modeled as spectrum)
     darkEnergyObs.quotient = .spectrum ∧
     -- P functor gives gauge symmetry

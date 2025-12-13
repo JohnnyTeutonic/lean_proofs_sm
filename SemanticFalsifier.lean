@@ -24,7 +24,7 @@ namespace SemanticFalsifier
 -- ============================================
 
 inductive Mechanism : Type where
-  | diagonal | fixedPoint | resource | independence
+  | diagonal | structural | resource | parametric
   deriving DecidableEq, Repr
 
 inductive QuotientGeom : Type where
@@ -204,7 +204,7 @@ axiom sm_not_falsifiable : ∀ f : SM_Falsifier, False
 def gen_count_claim : DerivationClaim := {
   constraint_name := "Generation count"
   schema := {
-    mechanism := .independence  -- Representation-theoretic underdetermination
+    mechanism := .parametric  -- Representation-theoretic underdetermination
     quotient := .nPartite 3  -- 3 generations as 3-partite structure
     witness := Fin 3  -- The three generations
   }
@@ -260,7 +260,7 @@ axiom dimension_not_falsifiable : ∀ f : Dimension_Falsifier, False
 def wrong_phase_claim : DerivationClaim := {
   constraint_name := "Phase Underdetermination (DELIBERATELY WRONG)"
   schema := {
-    mechanism := .independence
+    mechanism := .parametric
     quotient := .binary      -- WRONG: should be .spectrum
     witness := Bool          -- WRONG: should reflect S¹ structure
   }
@@ -273,7 +273,7 @@ def wrong_phase_claim : DerivationClaim := {
   Phase lives on S¹, which is a spectrum (infinite parameter space).
 -/
 def correct_phase_schema : Schema := {
-  mechanism := .independence  -- Same mechanism (underdetermination)
+  mechanism := .parametric  -- Same mechanism (underdetermination)
   quotient := .spectrum       -- CORRECT: phase is continuous parameter
   witness := Unit             -- Quotiented by observational equivalence
 }
@@ -290,7 +290,7 @@ def correct_phase_schema : Schema := {
 -/
 def wrong_phase_falsifier : AlternativeEncodingFalsifier wrong_phase_claim where
   alt_schema := correct_phase_schema
-  same_mechanism := rfl  -- Both use .independence
+  same_mechanism := rfl  -- Both use .parametric
   different_sym := by    -- .gauge ≠ .discrete
     simp only [Schema.forcedSym, quotientToSymType]
     intro h

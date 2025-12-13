@@ -32,7 +32,7 @@ Each gauge symmetry is forced by an independence-type obstruction.
 
 /-- The electroweak obstruction -/
 def electroweakObs : NegObj where
-  mechanism := .independence  -- Gauge from underdetermination
+  mechanism := .parametric  -- Gauge from underdetermination
   quotient := .spectrum       -- Continuous gauge parameter
   witness := Unit
 

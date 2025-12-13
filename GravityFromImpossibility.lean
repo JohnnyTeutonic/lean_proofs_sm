@@ -130,7 +130,7 @@ deriving DecidableEq, Repr
 /-- The simultaneity obstruction -/
 structure SimultaneityObstruction where
   name : String := "Simultaneity Underdetermination"
-  mechanism : Mechanism := .independence
+  mechanism : Mechanism := .parametric
   quotient : QuotientGeom := .spectrum  -- Infinite-dimensional foliation space
   /-- The quotient space is the space of all foliations -/
   quotientSpace : String := "Foliation Space"
@@ -154,7 +154,7 @@ def quotientToGravitySymType : QuotientGeom → SymType
     Simultaneity impossibility → Diff(M)
 -/
 theorem simultaneity_forces_diffeomorphism :
-    simultaneityObs.mechanism = .independence ∧
+    simultaneityObs.mechanism = .parametric ∧
     simultaneityObs.quotient = .spectrum ∧
     quotientToGravitySymType .spectrum = .diffeomorphism := by
   simp [simultaneityObs, quotientToGravitySymType]

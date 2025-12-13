@@ -46,7 +46,7 @@ structure Obstruction where
 
 /-- Convert spacetime obstruction to InverseNoetherV2.NegObj -/
 def Obstruction.toNegObj (o : Obstruction) : NegObj where
-  mechanism := .independence  -- Spacetime obstructions are independence type
+  mechanism := .parametric  -- Spacetime obstructions are independence type
   quotient := if o.isHyperbolic then .continuous else .spectrum
   witness := Fin o.witnessDim → ℝ  -- Witness space
 
