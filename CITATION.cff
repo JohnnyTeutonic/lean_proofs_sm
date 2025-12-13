@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: If you use this software, please cite it as below.
+type: software
+title: Lean Proofs - Standard Model from Impossibility Theory
+abstract: Machine-verified derivations of fundamental physics from measurement impossibilities.
+authors:
+  - family-names: Reich
+    given-names: Jonathan
+    email: jonathareich100@gmail.com
+version: 1.0.0
+date-released: 2025-12-13
+url: https://github.com/JohnnyTeutonic/lean_proofs_sm
+license: Apache-2.0
+keywords:
+  - standard-model
+  - lean4
+  - theorem-proving
+  - formal-verification
+  - gauge-theory
+  - impossibility-theory
+  - E8
+  - cosmological-constant
