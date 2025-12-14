@@ -50,3 +50,21 @@ lean_lib ProtonDecayFromE8
 lean_lib FineStructureFromE8
 lean_lib HyperchargeFromSU5
 lean_lib ImpossibilityTypeExtended
+lean_lib MathematicalObstructions
+
+
+-- Impossibility Theory for Mathematics (modular)
+lean_lib ImpossibilityTheory.Mathematics.Core.Mechanisms
+lean_lib ImpossibilityTheory.Mathematics.Core.Obstruction
+lean_lib ImpossibilityTheory.Mathematics.Core.ObstructionSet
+lean_lib ImpossibilityTheory.Mathematics.Core.ResolutionLaws
+lean_lib ImpossibilityTheory.Mathematics.Core.Forcing
+lean_lib ImpossibilityTheory.Mathematics.Core.Composition
+lean_lib ImpossibilityTheory.Mathematics.Domains.Algebra.GroupCompletion
+lean_lib ImpossibilityTheory.Mathematics.Main
+lean_lib ImpossibilityTheory.Mathematics.Domains.Meta.FailureWitness
+lean_lib ImpossibilityTheory.Mathematics.Domains.Algebra.Abelianization
+
+lean_lib ImpossibilityTheory.Mathematics.Core.ObstructionTransport
+lean_lib ImpossibilityTheory.Mathematics.Core.Models
+lean_lib ImpossibilityTheory.Mathematics.Core.Contingency
