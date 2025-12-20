@@ -47,3 +47,6 @@ lean_lib DESIDarkEnergyPredictions
 lean_lib NeutrinoHierarchyFromE8
 lean_lib StrongCPFromObstruction
 lean_lib ProtonDecayFromE8
+
+-- Foundational theory
+lean_lib ObstructionSignature
