@@ -32,7 +32,7 @@ Each gauge symmetry is forced by an independence-type obstruction.
 
 /-- The electroweak obstruction -/
 def electroweakObs : NegObj where
-  mechanism := .independence  -- Gauge from underdetermination
+  mechanism := .parametric  -- Gauge from underdetermination
   quotient := .spectrum       -- Continuous gauge parameter
   witness := Unit
 
@@ -134,12 +134,12 @@ These are physics interpretations, marked as conjectures.
 namespace Conjectural
 
 /-- CONJECTURE: The "color dimension" in impossibility terms -/
-axiom color_impossibility_dim : ℕ
-axiom color_dim_is_3 : color_impossibility_dim = 3
+def color_impossibility_dim : ℕ := 3
+theorem color_dim_is_3 : color_impossibility_dim = 3 := rfl
 
 /-- CONJECTURE: The "weak isospin dimension" in impossibility terms -/
-axiom weak_impossibility_dim : ℕ  
-axiom weak_dim_is_2 : weak_impossibility_dim = 2
+def weak_impossibility_dim : ℕ := 2
+theorem weak_dim_is_2 : weak_impossibility_dim = 2 := rfl
 
 /-- CONJECTURE: Gauge couplings unify at GUT scale ~10^16 GeV -/
 axiom couplings_unify_at_gut : Bool
