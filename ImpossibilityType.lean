@@ -3,6 +3,13 @@
   
   Core module defining obstruction types and mechanism classification.
   
+  **See also**: `ObstructionToSymmetry.lean` — The P functor that maps
+  obstructions to forced positive structures (symmetries). In that file the
+  mechanism-to-symmetry mapping is implemented at the level of the framework
+  (often by definition/characterization theorems), not established here.
+  
+  This file focuses on the core datatypes used across the pipeline.
+  
   Author: Jonathan Reich
   Date: December 2025
 -/
@@ -16,8 +23,8 @@ namespace ImpossibilityTypeTheory
 /-!
 # The Binary Quotient
 
-The terminal object in the category of impossibility quotients.
-Every obstruction ultimately reduces to this binary distinction.
+A minimal quotient type used throughout the framework as a binary indicator.
+No categorical universal property is asserted in this file.
 -/
 
 inductive Binary : Type where
@@ -332,19 +339,35 @@ def Prescription.default : (m : Mechanism) → Prescription m
 /-!
 # Stratification Tower (Simplified)
 
-The obstruction type generates a stratification hierarchy.
+This section provides a simplified stratification tower interface.
+Non-reflexivity of the tower is treated explicitly as an axiom boundary.
 -/
 
 /-- Level of the stratification tower -/
 def TowerLevel : ℕ → Type
-  | _ => Obstruction  -- Simplified: all levels are Obstruction
+  | n => Sum Obstruction (Fin n)
 
 /-- Embed from level n to level n+1 -/
-def embed (n : ℕ) : TowerLevel n → TowerLevel (n + 1) := fun o => o
+def embed : (n : ℕ) → TowerLevel n → TowerLevel (n + 1)
+  | _, Sum.inl o => Sum.inl o
+  | _, Sum.inr i => Sum.inr (Fin.castSucc i)
 
 /-- Non-reflexivity: there exist obstructions at level n+1 not from level n -/
-axiom non_reflexivity : ∀ n : ℕ, ∃ o : TowerLevel (n + 1), 
-  ∀ o' : TowerLevel n, embed n o' ≠ o
+theorem non_reflexivity : ∀ n : ℕ, ∃ o : TowerLevel (n + 1),
+  ∀ o' : TowerLevel n, embed n o' ≠ o := by
+  intro n
+  refine ⟨Sum.inr ⟨n, Nat.lt_succ_self n⟩, ?_⟩
+  intro o'
+  cases o' with
+  | inl o =>
+      simp [embed]
+  | inr i =>
+      intro h
+      have h' : Fin.castSucc i = ⟨n, Nat.lt_succ_self n⟩ := by
+        simpa [embed] using h
+      have hval : i.val = n := by
+        simpa using congrArg Fin.val h'
+      exact (Nat.ne_of_lt i.isLt) hval
 
 /-!
 # Summary Table
@@ -557,7 +580,7 @@ def classicalCount : ℕ := classicalImpossibilities.length
 
 theorem classical_count_is_14 : classicalCount = 14 := by native_decide
 
-/-- The file has no sorrys and compiles successfully -/
+/-- This file contains no `sorry`. Some global statements are represented as explicit axioms. -/
 theorem compilation_check : True := trivial
 
 /-!
@@ -677,7 +700,17 @@ structure ReflexiveClosureWitness (n : ℕ) where
   is_paradox : meta_obs.obs.quotient = .paradox
 
 /-- Non-reflexivity: each level generates new obstructions -/
-axiom stratification_non_reflexivity : ∀ n : ℕ, Nonempty (ReflexiveClosureWitness n)
+theorem stratification_non_reflexivity : ∀ n : ℕ, Nonempty (ReflexiveClosureWitness n) := by
+  intro n
+  refine ⟨{
+    meta_obs := {
+      level := n + 1
+      obs := { mechanism := .diagonal, quotient := .paradox, description := "" }
+      level_appropriate := Or.inr rfl
+    }
+    at_level := rfl
+    is_paradox := rfl
+  }⟩
 
 /-!
 # Obstruction Monad
@@ -1443,9 +1476,24 @@ def SelfReferenceObs : Obstruction := {
 }
 
 /-- Reflexive Closure Theorem: each level generates new obstructions
-    This is axiomatic - the proof requires decidable equality on descriptions -/
-axiom reflexive_closure (n : ℕ) : 
-    ∃ (o : MetaTower (n + 1)), ∀ o' : MetaTower n, MetaTower.embed n o' ≠ o
+    This is stated here at the level of the simplified `MetaTower` encoding. -/
+theorem reflexive_closure (n : ℕ) :
+    ∃ (o : MetaTower (n + 1)), ∀ o' : MetaTower n, MetaTower.embed n o' ≠ o := by
+  refine ⟨{ level := 0, base := Obstruction.trivial, metaDesc := "" }, ?_⟩
+  intro o'
+  cases n with
+  | zero =>
+      intro h
+      have hLevel : (1 : ℕ) = 0 := by
+        have := congrArg MetaObs.level h
+        simpa [MetaTower.embed, Obstruction.lift] using this
+      exact Nat.one_ne_zero hLevel
+  | succ n =>
+      intro h
+      have hLevel : Nat.succ o'.level = 0 := by
+        have := congrArg MetaObs.level h
+        simpa [MetaTower.embed, Nat.succ_eq_add_one] using this
+      exact Nat.succ_ne_zero _ hLevel
 
 /-!
 ## Noether-Impossibility Adjunction
