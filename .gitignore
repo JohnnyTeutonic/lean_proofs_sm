@@ -1,0 +1,8 @@
+# Lake build artifacts
+.lake/
+lake-packages/
+build/
+
+# Editor files
+.vscode/
+*.olean
