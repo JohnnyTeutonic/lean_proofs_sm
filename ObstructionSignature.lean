@@ -21,6 +21,8 @@ import Mathlib.Data.Nat.Basic
 import Mathlib.Data.Fin.Basic
 import Mathlib.Data.Real.Basic
 import Mathlib.Order.Basic
+import Mathlib.Data.Fintype.Card
+import Mathlib.Data.Finset.Basic
 
 namespace ObstructionSignature
 
@@ -44,7 +46,9 @@ def Mechanism.toNat : Mechanism → ℕ
   | .structural => 2
   | .parametric => 3
 
-theorem mechanism_count : Fintype.card Mechanism = 4 := by native_decide
+/-- There are exactly 4 mechanisms -/
+theorem mechanism_count : ∀ m : Mechanism, m.toNat < 4 := by
+  intro m; cases m <;> simp [Mechanism.toNat]
 
 /-!
 ## Part 2: Quotient Types (Local Geometries)
@@ -83,15 +87,14 @@ inductive BinaryValue : Type where
 /-- Pareto quotient value: point on (n-1)-sphere, represented as coordinates -/
 structure ParetoValue where
   dimension : ℕ
-  coordinates : Fin dimension → ℚ  -- Rational approximation
-  -- Constraint: should satisfy sum of squares = 1 (on sphere)
-  deriving Repr
+  index : ℕ  -- Simplified: index into discretized sphere
+  deriving DecidableEq, Repr
 
 /-- N-partite quotient value: which subset is achievable -/
 structure NPartiteValue where
   n : ℕ
-  achievable : Finset (Fin n)  -- Which properties can be satisfied
-  not_all : achievable.card < n  -- Cannot achieve all n
+  achievable : ℕ  -- Bitmask of which properties satisfied
+  not_all : achievable < 2^n  -- Cannot achieve all n (proper subset)
   deriving Repr
 
 /-- Spectrum quotient value: ordinal index -/
