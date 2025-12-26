@@ -72,8 +72,8 @@ The temperature cancels! This is a fundamental bound.
 def entropy_info_bound (C : PhysConstants) (F : ThermoFlow) : Prop :=
   dSds F ≥ C.kB * C.ln2 * F.dIds
 
-/-- The derivation: Landauer → entropy-info bound.
-    Axiomatized: Float inequality reasoning not available in Lean. -/
+/-- AXIOM: Landauer → entropy-info bound.
+    Requires Float inequality reasoning for division by T > 0. -/
 axiom landauer_implies_entropy_bound (C : PhysConstants) (F : ThermoFlow)
     (hL : landauer_rate_satisfied C F) (hT : F.T > 0) :
     entropy_info_bound C F
@@ -106,8 +106,8 @@ But γ appears explicitly when we define canonical information rates.
 def cosmic_landauer_bound (C : PhysConstants) (F : ThermoFlow) (M : MCI) : Prop :=
   dSdlna F M ≥ C.kB * C.ln2 * dIdlna F M
 
-/-- The cosmic bound follows from modular bound.
-    Axiomatized: Float multiplication preserves inequality. -/
+/-- AXIOM: Cosmic bound follows from modular bound.
+    Requires Float multiplication preserves inequality. -/
 axiom modular_to_cosmic (C : PhysConstants) (F : ThermoFlow) (M : MCI)
     (hE : entropy_info_bound C F) :
     cosmic_landauer_bound C F M

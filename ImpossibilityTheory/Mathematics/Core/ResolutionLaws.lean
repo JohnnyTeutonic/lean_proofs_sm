@@ -17,6 +17,9 @@ variable (C : Type u) [Category.{u} C]
 
 /-- Laws an obstruction may satisfy (optional structure). -/
 structure ObstructionLaw (o : StructuralObstruction C) : Prop where
-  stable_under_iso :  (X Y : C), (X  Y)  StructuralObstruction.Resolves X o  StructuralObstruction.Resolves Y o
+  stable_under_iso :
+    forall {X Y : C}, (X ≅ Y) ->
+      StructuralObstruction.Resolves X o ->
+      StructuralObstruction.Resolves Y o
 
 end ImpossibilityTheory.Mathematics

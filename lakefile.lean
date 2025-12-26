@@ -1,70 +1,133 @@
-/-
-Copyright 2025 Jonathan Reich
-Licensed under the Apache License, Version 2.0
--/
 import Lake
 open Lake DSL
 
-package lean_proofs_sm where
+package «impossibility_physics» where
   leanOptions := #[
     ⟨`pp.unicode.fun, true⟩,
     ⟨`autoImplicit, false⟩
   ]
 
 require mathlib from git
-  "https://github.com/leanprover-community/mathlib4" @ "v4.25.0"
+  "https://github.com/leanprover-community/mathlib4.git"
 
--- Core dependency
-@[default_target]
-lean_lib ImpossibilityType
-
-lean_lib InverseNoetherV2 where
-  roots := #[`InverseNoetherV2]
-
--- Physics derivation chain
-lean_lib GaugeFromImpossibility
-lean_lib GaugeGroupClassification
-lean_lib StandardModelFromImpossibility
-lean_lib HyperchargeQuantization
-lean_lib ExceptionalImpossibility
-lean_lib GenerationNumberFromE8
-lean_lib CosmicFractionsFromE8
-lean_lib GrandUnificationImpossibility
-lean_lib WeinbergAngleRefined
-lean_lib GravityFromImpossibility
-lean_lib SpacetimeFromObstruction
-lean_lib CosmologicalConstantMinimal
-lean_lib KappaGeometricMeaning
-lean_lib DarkMatterFromObstruction
-lean_lib DarkEnergyFromObstruction
-lean_lib QuantumGravityToE8Refined
-lean_lib NeutrinoAnomalies
-lean_lib ProtonDecayPrediction
-lean_lib UVIRChainDiscrimination
-lean_lib RenormalizabilityFromObstruction
-lean_lib CabibboAngleFromE8
-lean_lib DESIDarkEnergyPredictions
-lean_lib NeutrinoHierarchyFromE8
-lean_lib StrongCPFromObstruction
-lean_lib ProtonDecayFromE8
-lean_lib FineStructureFromE8
-lean_lib HyperchargeFromSU5
-lean_lib ImpossibilityTypeExtended
-lean_lib MathematicalObstructions
-
-
--- Impossibility Theory for Mathematics (modular)
-lean_lib ImpossibilityTheory.Mathematics.Core.Mechanisms
-lean_lib ImpossibilityTheory.Mathematics.Core.Obstruction
-lean_lib ImpossibilityTheory.Mathematics.Core.ObstructionSet
-lean_lib ImpossibilityTheory.Mathematics.Core.ResolutionLaws
-lean_lib ImpossibilityTheory.Mathematics.Core.Forcing
-lean_lib ImpossibilityTheory.Mathematics.Core.Composition
-lean_lib ImpossibilityTheory.Mathematics.Domains.Algebra.GroupCompletion
-lean_lib ImpossibilityTheory.Mathematics.Main
-lean_lib ImpossibilityTheory.Mathematics.Domains.Meta.FailureWitness
-lean_lib ImpossibilityTheory.Mathematics.Domains.Algebra.Abelianization
-
-lean_lib ImpossibilityTheory.Mathematics.Core.ObstructionTransport
-lean_lib ImpossibilityTheory.Mathematics.Core.Models
-lean_lib ImpossibilityTheory.Mathematics.Core.Contingency
+-- Physics files referenced in impossibility_manifesto.tex prose (120 files)
+lean_lib «AblationWitnesses»
+lean_lib «AdjunctionUniqueness»
+lean_lib «AllLieAlgebrasExcluded»
+lean_lib «AlphaRunning»
+lean_lib «AlphaRunningFromE8»
+lean_lib «AlternativeEncodings»
+lean_lib «BinnedWzAnalysis»
+lean_lib «CPTFromMechanisms»
+lean_lib «CabibboAngleFromE8»
+lean_lib «CartanClassificationLayer»
+lean_lib «ChannelFactorizationUnique»
+lean_lib «ConfinementFromObstruction»
+lean_lib «ConfinementSplittingStrengthened»
+lean_lib «ConfluenceToGamma»
+lean_lib «ContingentSectorInterface»
+lean_lib «CosmicFractionsFromE8»
+lean_lib «CosmologicalPredictionChain»
+lean_lib «CosmologyRobustness»
+lean_lib «DarkEnergyFromObstruction»
+lean_lib «DarkMatterFalsifiability»
+lean_lib «DarkMatterFromObstruction»
+lean_lib «DarkMatterSectorForced»
+lean_lib «DegeneracySpace»
+lean_lib «DegeneracySuppressionDerived»
+lean_lib «DirectObservables»
+lean_lib «DualityMonadBridge»
+lean_lib «DynamicsAsKernel»
+lean_lib «DynamicsMasterFile»
+lean_lib «E8MassHierarchy»
+lean_lib «E8UniquenessProof»
+lean_lib «EmpiricalTests»
+lean_lib «EmpiricalValidation»
+lean_lib «FortyTwoDerivations»
+lean_lib «FourMechanismsUniqueness»
+lean_lib «GRUniquenessCompletionV2»
+lean_lib «GUTCandidateCore»
+lean_lib «GammaDerivation»
+lean_lib «GammaFromMoonshine»
+lean_lib «GaugeFromImpossibility»
+lean_lib «GaugeGroupCandidates»
+lean_lib «GaugeGroupClassificationProof»
+lean_lib «GenerationNumberFromE8»
+lean_lib «GravitationalObstructionFunctor»
+lean_lib «GravityFromImpossibility»
+lean_lib «GravityFromObstruction»
+lean_lib «GrowthPredictionsExplicit»
+lean_lib «HawkingFromModular»
+lean_lib «HubbleTensionScope»
+lean_lib «HyperchargeNormalizationProof»
+lean_lib «HyperchargeQuantization»
+lean_lib «ISWPredictions»
+lean_lib «InfoGeomFlow»
+lean_lib «InfoThermoCore»
+lean_lib «InverseNoetherV2»
+lean_lib «IrreversibilityTheorem»
+lean_lib «JacobsonGravity»
+lean_lib «JarlskogFromE6»
+lean_lib «KappaDerivation»
+lean_lib «KappaFromObstructionEntropy»
+lean_lib «KappaGeometricMeaning»
+lean_lib «LandauerCosmoBridge»
+lean_lib «LeptonMassRatiosFromE6»
+lean_lib «LeviCivitaFromTerminal»
+lean_lib «MCIFromRG»
+lean_lib «MetaCategoricalIncompleteness»
+lean_lib «MixedAnomalyConstraint»
+lean_lib «MixingFromConfinement»
+lean_lib «ModularCosmicBridge»
+lean_lib «ModularFlowInterface»
+lean_lib «MultiDatasetCoherence»
+lean_lib «NeffStructural»
+lean_lib «NeutrinoAnomalies»
+lean_lib «NeutrinoMassRatio»
+lean_lib «NoConservativeDynamics»
+lean_lib «ObsDepth»
+lean_lib «ObstructionDynamics»
+lean_lib «ObstructionFlow»
+lean_lib «ObstructionMeasureTheory»
+lean_lib «ObstructionSpaceTopology»
+lean_lib «ObstructionToSymmetry»
+lean_lib «OperationalSchema»
+lean_lib «PMNSAnglesFromE8»
+lean_lib «PathIntegralFromFunctoriality»
+lean_lib «ProtonDecayPrediction»
+lean_lib «QuantumChannelDynamics»
+lean_lib «QuantumGravityToE8Refined»
+lean_lib «QuantumGravityUnification»
+lean_lib «QuarkMassRatioFromE8»
+lean_lib «QuotientPresentationGroupoid»
+lean_lib «RGAdjunctionConnection»
+lean_lib «RGBetaFunction»
+lean_lib «RGFlowsAsMorphisms»
+lean_lib «RGObstructionMonotone»
+lean_lib «RenormalizabilityFromObstruction»
+lean_lib «RepresentationUniqueness»
+lean_lib «SU5UniquenessChirality»
+lean_lib «SeesawSpinorTheorem»
+lean_lib «SelectionTrilemmasHardened»
+lean_lib «SemanticContract»
+lean_lib «SemanticFalsifier»
+lean_lib «SpacetimeFromObstruction»
+lean_lib «SpectrumGaugeUniqueness»
+lean_lib «StandardModelFromImpossibility»
+lean_lib «StringLandscapeObstruction»
+lean_lib «StrongCPString»
+lean_lib «StrongCouplingFromE8»
+lean_lib «StructuralDarkSector»
+lean_lib «TerminalInSym»
+lean_lib «ThermodynamicsFromDiagonal»
+lean_lib «Theta23OctantInvariant»
+lean_lib «TomitaTakesaki»
+lean_lib «U1Necessity»
+lean_lib «UVIRChainDiscrimination»
+lean_lib «UniversalFlowRate»
+lean_lib «VisibleSectorUniqueness»
+lean_lib «VonNeumannE8Connection»
+lean_lib «WeinbergAngleFromAdjunction»
+lean_lib «WhyE6ForIR»
+lean_lib «WitnessStructure»
+lean_lib «YukawaMixingE8»
