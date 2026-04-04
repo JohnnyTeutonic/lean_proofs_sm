@@ -18,38 +18,26 @@ The Standard Model gauge group SU(3) × SU(2) × U(1) can be characterized as th
 
 ## Structure
 
-### Foundation
-| File | Description |
-|------|-------------|
-| `ImpossibilityType.lean` | Core type theory: mechanisms, quotient geometries, Binary terminal object |
-| `InverseNoetherV2.lean` | The B ⊣ P adjunction between Obs and Sym categories |
-
 ### Standard Model Derivations
 | File | Result |
 |------|--------|
 | `GaugeFromImpossibility.lean` | Gauge group structure from measurement constraints |
 | `GaugeGroupClassification.lean` | Classification of admissible gauge groups |
+| `MatterContentUniqueness.lean` | SM Uniqueness |
 | `StandardModelFromImpossibility.lean` | Full SM derivation chain |
-| `HyperchargeQuantization.lean` | Y_min = 1/6 from anomaly cancellation |
-| `WeinbergAngleRefined.lean` | sin²θ_W = 3/8 at GUT scale |
-| `GenerationNumberFromE8.lean` | N_gen = 3 from E₈ → E₆ × SU(3) branching |
+| `TrialityMixingConnection.lean` | Triality Mixing |
+| `U1ExtensionClassification.lean` | Classification of admissible gauge groups |
+| `YukawaSelectionRulesFromZ3.lean` | Yukawa Selection Rules |
 
-### Gravity and Cosmology
+### Defensive Architecture
 | File | Result |
 |------|--------|
-| `GravityFromImpossibility.lean` | Diffeomorphism invariance from reference frame obstruction |
-| `SpacetimeFromObstruction.lean` | d = 4 spacetime dimension |
-| `CosmologicalConstantMinimal.lean` | Λ suppression from E₈ structure |
-| `DarkMatterFromObstruction.lean` | Dark sector as measurement-inaccessible obstruction class |
-| `DarkEnergyFromObstruction.lean` | w(a) dynamics from obstruction flow |
+| `AdversarialInputWitnessTestsCMP.lean` | Adversarial Testing of Input/Encoding |
+| `OperationalSchemaCMP.lean` | Operational Schema used for bridging Semantic gap and the physical impossibilities |
+| `SemanticContractCMP.lean` | Formalises the formal interface showing the forced symmetry is invariant under schema-equivalent encodings |
+| `SMMinimnalConstrains.lean` | Defines the minimal constraints that force the gauge group |
+| `Stage2InterfaceContract.lean` | Formalises the interface between the workfow (outside of scope) and the domain expertise to derive specific values |
 
-### Predictions
-| File | Prediction | Status |
-|------|------------|--------|
-| `CabibboAngleFromE8.lean` | sin θ_C = 1/√20 ≈ 0.2236 | 0.77% from measured |
-| `NeutrinoHierarchyFromE8.lean` | Normal ordering | Testable (JUNO) |
-| `ProtonDecayFromE8.lean` | p → μ⁺π⁰ forbidden | Testable |
-| `DESIDarkEnergyPredictions.lean` | w_a/(1+w_0) ≈ -5.9 | Consistent with DESI DR2 |
 
 ## Requirements
 
