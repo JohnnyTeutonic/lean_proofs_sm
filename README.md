@@ -109,10 +109,10 @@ See [`PREDICTIONS_PREREGISTRATION.md`](PREDICTIONS_PREREGISTRATION.md) for a com
 ## Citation
 
 ```bibtex
-@software{reich2025sm_impossibility,
+@software{reich2026sm_impossibility,
   author = {Reich, Jonathan},
   title = {Standard Model from Impossibility Theory},
-  year = {2025},
+  year = {2026},
   url = {https://github.com/JohnnyTeutonic/lean_proofs_sm}
 }
 ```
